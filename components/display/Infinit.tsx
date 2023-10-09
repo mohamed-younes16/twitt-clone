@@ -15,7 +15,7 @@ function Infinite() {
       const options = {
         root: null,
         rootMargin: '0px',
-        threshold: 0.5,
+        threshold: 0.9,
       };
 
       const callback = (entries:any) => {
