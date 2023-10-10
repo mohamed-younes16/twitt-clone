@@ -51,7 +51,7 @@ const ThreadForm = () => {
     try {
 
     const create = await  createThreadtodb({ content : v.content ,isReply:false})
-    
+    console.log(create)
 if( create) {
 form.setValue("content","")
 toast.success("created successfully",{})

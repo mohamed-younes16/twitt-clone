@@ -22,10 +22,10 @@ function Infinite() {
         entries.forEach((entry:any) => {
           if (entry.isIntersecting) {
             // @ts-ignore: Object is possibly 'null'.
-            const limit = +search?.get("limit") || 5;
+            const limit = +search?.get("limit") || 3;
             
             toast.loading("fetching more posts",{duration:3000})
-            router.push(`${path}?limit=${limit + 5}`, { scroll: false });
+            router.push(`${path}?limit=${limit + 3}`, { scroll: false });
 
             setHasIntersected(true);
           }

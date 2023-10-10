@@ -12,12 +12,6 @@ const page =async ({params:{id}}:{params:{id:string}}) => {
 
 const targetThread = await getSpecificThread(id )
 const otherReplies : any[] = await getThreads(targetThread.children) || []
-const repliesAuthors = await findUsersbyList(otherReplies.map(e=>e.author)|| [])
-
-const replyImages = {
-    images:Array.from(new Set(repliesAuthors?.map(e => e.image)))
-    ,repliesLength:otherReplies.length
-};
 
 
 const user = await currentUser() || {id:""}
@@ -29,7 +23,7 @@ if(!userdb?.onboarded) redirect("/onboarding")
 return (<div className=' grow  bg-[#040209]  max-w-3xl' >
 
 <main className="relative w-full bg-dark-4 rounded-2xl  max-sm:p-2 p-6 max-w-3xl mx-auto">
-                <ThreadCard replies={replyImages} reply={true} data={targetThread}/>
+                <ThreadCard  data={targetThread}/>
 
     </main>
             <div className='mt-10 !bg-[#1f1f22]  flexcenter gap-4 rounded-2xl p-5 max-sm:p-2'>

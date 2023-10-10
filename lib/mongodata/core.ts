@@ -138,7 +138,8 @@ export const getallThreadfromdb = async ({limit=10, page }:{limit?:number,page?:
 
     try {
 connectToDB()
-        const allthreads: any[] = await Threads.find().limit(limit).sort({createdAt:-1})
+
+        const allthreads: any[] = await Threads.find({isReply:false}).limit(limit).sort({createdAt:-1})
    
         return allthreads
 
