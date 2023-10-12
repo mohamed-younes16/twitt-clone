@@ -95,7 +95,7 @@ if (res){
 
 
 
-export const createThreadtodb = async ({content,isReply=false,imageUrl}:{content:string,isReply:boolean,imageUrl:string})=>{
+export const createThreadtodb = async ({content,isReply=false,imageUrl=""}:{content:string,isReply:boolean,imageUrl?:string})=>{
 
     try {
         connectToDB()
