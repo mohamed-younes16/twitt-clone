@@ -42,7 +42,7 @@ export default async function RootLayout({
       <main className=" flex max-md:block  pt-[120px] ">
         <LeftBar/>
 
-      <section className='px-10 max-md:px-4 flex-1 flexcenter mb-5 rounded-2xl '>
+      <section className='px-10 max-md:px-4 max-sm:px-2 flex-1 flexcenter mb-5 rounded-2xl '>
 
         <div className=" flex justify-center  w-full ">
           {children}

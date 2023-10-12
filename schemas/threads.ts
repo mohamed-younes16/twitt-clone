@@ -34,7 +34,7 @@ const Threadsschema = new mongoose.Schema({
         type:Boolean,
         default:false
     }
-
+    ,imageUrl: String
 })
 
 

@@ -25,6 +25,11 @@ import { useRouter } from "next/navigation"
 
 import { createThreadtodb } from "@/lib/mongodata/core"
 import { Toaster, toast } from "sonner"
+import Image from "next/image"
+import { Input } from "../ui/input"
+import { handleimage, isBase64Image } from "@/lib/utils"
+import { useState } from "react"
+import { useUploadThing } from "@/lib/uploding/uploadthing"
 
 
 
@@ -36,6 +41,9 @@ const ThreadForm = () => {
   
     const router = useRouter()
 
+    const {startUpload} = useUploadThing("imageUploader")
+    
+    const [files, setfiles] = useState<File[]>([])
 
     const form = useForm({
         
@@ -47,17 +55,33 @@ const ThreadForm = () => {
 
     async function onSubmit(v: z.infer<typeof threadevalidation>) {
         
+        const isbase64 = isBase64Image(v.imageUrl)
+  
+
+        
+        if(isbase64) {
+            const res = await  startUpload(files) || []
+      
+            if(res[0] ) {
+                
+                v.imageUrl = res[0].url
+                console.log(v)
+            }
+        }
+
 
     try {
+    
 
-    const create = await  createThreadtodb({ content : v.content ,isReply:false})
-    console.log(create)
-if( create) {
-form.setValue("content","")
-toast.success("created successfully",{})
-setTimeout(() => {
-    router.push("/")
-}, 500);
+    const create = await  createThreadtodb({ content : v.content ,isReply:false,imageUrl:v.imageUrl})
+  
+        if( create) {
+        form.setValue("content","")
+        toast.success("created successfully",{})
+        setTimeout(() => {
+            router.push("/")
+
+    }, 500);
 
 }
 else {
@@ -73,8 +97,6 @@ console.log("try again ")
     }, 1000);
     
     }
-
-
 
 
 
@@ -107,6 +129,39 @@ return (
         </FormControl>
         <FormMessage />
     </FormItem>
+
+
+        )}
+    />
+
+<FormField
+    control={form.control}
+
+    name="imageUrl"
+
+    render={({ field }) => (
+
+
+        <FormItem className=" flex items-center   ">
+
+            <FormLabel className=" relative overflow-hidden
+            !text-white min-w-[90px] !min-h-[90px] 
+            bg-gray-900 rounded-full flexcenter">
+                {field?.value ? (
+                <Image src={field.value} 
+                fill alt="image for you"  />)
+                :(<Image src="/profile.svg" height={50} 
+                    className=" object-contain" alt="image" width={50}/>)
+            
+            }
+            </FormLabel>
+
+            <FormControl className="account-form_image-input cursor-pointer text-white">
+                <Input type="file"   accept="images/*" 
+                onChange={e=>handleimage(e , field.onChange,setfiles)} />
+            </FormControl>
+            
+        </FormItem>
 
 
         )}

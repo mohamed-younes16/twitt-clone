@@ -95,13 +95,13 @@ if (res){
 
 
 
-export const createThreadtodb = async ({content,isReply=false}:{content:string,isReply:boolean})=>{
+export const createThreadtodb = async ({content,isReply=false,imageUrl}:{content:string,isReply:boolean,imageUrl:string})=>{
 
     try {
         connectToDB()
         const current = await currentUser()
         const userfromdb = await User.findOne({id: current?.id })
-        const created = await Threads.create({author:userfromdb._id,content,isReply})
+        const created = await Threads.create({author:userfromdb._id,content,isReply,imageUrl})
         console.log(created)
         return created
     

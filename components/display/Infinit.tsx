@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client"
+
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import React, { useRef, useEffect, useState } from 'react';
 import {Toaster , toast} from "sonner"
@@ -9,6 +10,8 @@ function Infinite() {
   const search = useSearchParams();
   const path = usePathname();
   const router = useRouter();
+
+
 
   useEffect(() => {
     if (!hasIntersected) {

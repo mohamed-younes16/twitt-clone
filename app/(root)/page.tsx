@@ -1,3 +1,4 @@
+import Resetter from "@/components/display/Resetter"
 import ThreadCard from "@/components/display/ThreadCard"
 
 import { getallThreadfromdb } from "@/lib/mongodata/core"
@@ -11,8 +12,10 @@ export default async function Home({searchParams:{limit}}:{searchParams:{limit:n
 
 
 
-  return (<><main className="relative w-full  bg-dark-4 rounded-2xl  p-10
-  max-md:p-4 
+  return (<>
+
+  <main className="relative w-full  bg-dark-4 rounded-2xl  p-10
+  max-md:p-2 
   max-w-3xl flex flex-col gap-4 mx-auto">
 
       {allthrads?.length > 0  ? (allthrads?.map((e,i):any=>(
@@ -21,7 +24,7 @@ export default async function Home({searchParams:{limit}}:{searchParams:{limit:n
             No threads Be the first One who share <Image src="/right-arrow.svg" height={30} width={30} alt="" />
         </Link>}
     </main>
-
+<Resetter/>
   </>
     
   )

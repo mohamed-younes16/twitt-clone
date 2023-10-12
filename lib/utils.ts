@@ -1,4 +1,5 @@
 import { type ClassValue, clsx } from "clsx"
+import { ChangeEvent } from "react";
 import { twMerge } from "tailwind-merge"
  
 export function cn(...inputs: ClassValue[]) {
@@ -39,4 +40,30 @@ export function formatThreadCount(count: number): string {
     const threadWord = count === 1 ? "Thread" : "Threads";
     return `${threadCount} ${threadWord}`;
   }
+}
+
+
+export const handleimage =   (e:ChangeEvent<HTMLInputElement> , fieldchange:(v:string)=>void,setfiles:any)=>{
+
+  e.preventDefault()
+
+  const filereader = new  FileReader()
+
+  if(e.target?.files && e.target?.files.length > 0) {
+      
+      const file = e.target.files[0]
+
+
+      if (!file.type.includes('image')) return
+
+      setfiles(Array.from(e.target.files))
+      
+      filereader.readAsDataURL(file)
+
+      filereader.onload   = async (event) => {
+
+                  fieldchange(event.target?.result?.toString() || "")
+      }
+  }
+
 }

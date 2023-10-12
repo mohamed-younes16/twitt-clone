@@ -27,6 +27,7 @@ interface Datatype {
     children: Datatype[];
     createdAt: string;
     __v: number;
+    imageUrl:string;
 }
 
 
@@ -46,14 +47,14 @@ const ThreadCard =async  ({data,comment,last=false}:
   
 
 return (
-<div className=' bg-dark-1 shadow-black md:hover:scale-[102%]   duration-500 transition-all hover:shadow-[0px_0px_15px_0px_#373737]   p-6 rounded-2xl m-2 '>
-    <div className="flex gap-10">
+<div className=' bg-dark-1 shadow-black md:hover:scale-[102%]   duration-500 transition-all hover:shadow-[0px_0px_15px_0px_#373737]  max-md:p-4  p-6 rounded-2xl m-2 '>
+    <div className="flex max-sm:gap-2 gap-10">
 
    
     <div className=" relative">
             <Link  href={`/profile/${threadOwner?.id}`} 
                     className=' hover:rotate-[360deg] z-20 flex transition-all
-                        duration-300 relative rounded-full w-[55px]
+                        duration-300 relative rounded-full w-[55px] max-md:h-[35px] max-md:w-[35px]
                     h-[55px] overflow-hidden
                                 border-white border-2  '>  
                                     <Image src={threadOwner.image } className='bg-black object-cover' fill alt=''/>
@@ -63,11 +64,17 @@ return (
     
     </div>
 
-    <div className=' mb-5'>
+    <div className=' mb-5 w-full'>
             <p className="font-bold mb-2 text-xl max-sm:text-lg  whitespace-nowrap">{threadOwner.username} </p>
 
             <p className="text-gray-400">{data.content} </p>
-            <div className="flex gap-6 mt-10 "> 
+            {data?.imageUrl &&  <div className="h-80 rounded-lg overflow-hidden max-[520px]:h-36
+            max-lg:h-64  max-sm:w-full max-md:w-[450px]  my-2 w-full relative " >
+                <Image src={data?.imageUrl} fill className=' object-cover' alt='idk'/>
+            </div> }
+           
+       
+            <div className="flex gap-4 mt-6 justify-start  "> 
 
             {ThreadCardTabs.map((e)=>(
 

@@ -17,7 +17,7 @@ import { Input } from "@/components/ui/input"
 import { ChangeEvent, useState } from "react"
 import Image from "next/image"
 import { Textarea } from "../ui/textarea"
-import { isBase64Image } from "@/lib/utils"
+import { handleimage, isBase64Image } from "@/lib/utils"
 import { useUploadThing } from "@/lib/uploding/uploadthing"
 import { updateUser } from "@/lib/mongodata/core"
 import { useRouter } from "next/navigation"
@@ -87,11 +87,9 @@ const ProfileForm = ({user}:props) => {
     try {
 
     const usertobesend = {...v,id:user.id}
-    const resp =  await  updateUser(usertobesend)
-      
-   
+    await  updateUser(usertobesend)
+
     
-  
     } catch (error:any) {
         console.log(error.message,"_________________")
     }
@@ -105,31 +103,6 @@ const ProfileForm = ({user}:props) => {
     
     }
 
-
-    const handleimage =   (e:ChangeEvent<HTMLInputElement> , fieldchange:(v:string)=>void)=>{
-
-        e.preventDefault()
-
-        const filereader = new  FileReader()
-
-        if(e.target?.files && e.target?.files.length > 0) {
-            
-            const file = e.target.files[0]
-      
-
-            if (!file.type.includes('image')) return
-
-            setfiles(Array.from(e.target.files))
-            
-            filereader.readAsDataURL(file)
-
-            filereader.onload   = async (event) => {
-
-                        fieldchange(event.target?.result?.toString() || "")
-            }
-        }
-
-}
 
 
 return (
@@ -163,7 +136,7 @@ return (
 
             <FormControl className="account-form_image-input cursor-pointer text-white">
                 <Input type="file"   accept="images/*" 
-                onChange={e=>handleimage(e , field.onChange)} />
+                onChange={e=>handleimage(e , field.onChange,setfiles)} />
             </FormControl>
             
         </FormItem>
@@ -255,4 +228,4 @@ return (
 )
 }
 
-export default ProfileForm
+export default ProfileForm 
