@@ -42,7 +42,7 @@ const ThreadForm = () => {
     const router = useRouter()
 
     const {startUpload} = useUploadThing("imageUploader")
-    
+ 
     const [files, setfiles] = useState<File[]>([])
 
     const form = useForm({
@@ -85,16 +85,14 @@ const ThreadForm = () => {
 
 }
 else {
-console.log("try again ")
+    toast.error("error happened",)
+
+
 }
     
     } catch (error:any) {
         console.log(error.message)
     }
-    
-    setTimeout(() => {
-        
-    }, 1000);
     
     }
 
@@ -168,7 +166,7 @@ return (
     />
 
  <Button type="submit"
-  disabled={ !form.formState.isValid || form.formState.isSubmitted}
+  disabled={form.formState.isSubmitting || form.formState.isSubmitted}
    className={` transition-all duration-300  leading-[30px] rounded-ful overflow-hidden   !bg-violet-600  text-xl !text-white font-semibold ${form.formState.isValid  ? "!opacity-1  scale-100" : "scale-0  w-0 h-0 !opacity-0" }`}>
     Submit
     </Button>   
