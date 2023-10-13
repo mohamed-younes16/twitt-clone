@@ -69,7 +69,7 @@ return (
 
             <p className="text-gray-400">{data.content} </p>
             {data?.imageUrl &&  <div className="h-80 rounded-lg overflow-hidden max-[520px]:h-36
-            max-lg:h-64  max-sm:w-full max-md:w-[450px]  my-2 w-full relative " >
+            max-lg:h-64  max-sm:w-full max-md:w-[450px] max-w-[550px]  my-2 w-full relative " >
                 <Image src={data?.imageUrl} fill className=' object-cover' alt='idk'/>
             </div> }
            
