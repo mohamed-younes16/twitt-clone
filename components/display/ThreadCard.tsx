@@ -52,7 +52,7 @@ return (
 
    
     <div className=" relative">
-            <Link  href={`/profile/${threadOwner?.id}`} 
+            <Link  aria-label="Profile "   href={`/profile/${threadOwner?.id}`} 
                     className=' hover:rotate-[360deg] z-20 flex transition-all
                         duration-300 relative rounded-full w-[55px] max-md:h-[35px] max-md:w-[35px]
                     h-[55px] overflow-hidden

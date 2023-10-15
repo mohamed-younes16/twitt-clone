@@ -22,7 +22,7 @@ const Nav = async ({image}:{image:string}) => {
                 </div>
                 <SignedIn>
                   <div className="flexcenter    gap-6">
-                  <Link href='/onboarding' className=' hover:rotate-[360deg]
+                  <Link href='/onboarding' aria-label="Profile onborading" className=' hover:rotate-[360deg]
                  transition-all 
                   duration-300 relative rounded-full min-w-[65px] min-h-[65px]
                    overflow-hidden
