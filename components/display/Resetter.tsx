@@ -11,7 +11,7 @@ function Resetter() {
   const router = useRouter();
 
   useLayoutEffect(() => {
-console.log("##############")
+
     const pageAccessedByReload = (
 
         window.performance
@@ -22,7 +22,7 @@ console.log("##############")
 
 
     if(pageAccessedByReload) {
-      console.log("reloaded")
+  
       router.push(`${path}`);
   
     }

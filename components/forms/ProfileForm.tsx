@@ -91,7 +91,7 @@ const ProfileForm = ({user}:props) => {
 
     
     } catch (error:any) {
-        console.log(error.message,"_________________")
+        console.log(error.message)
     }
     
     toast.success("updatedsuccessfully")

@@ -55,5 +55,5 @@ export const POST = async (request: Request) => {
    
   }
   
-  console.log(evnt.data,"##")
+
 }

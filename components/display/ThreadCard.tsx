@@ -113,7 +113,7 @@ return (
                 rounded-full w-[35px]  min-h-[35px]
                 overflow-hidden
                 '>  
-                    <Image src={e }  fill alt=''/>
+                    <Image src={e } className=' object-cover'  fill alt=''/>
                 
                 </div>
             
