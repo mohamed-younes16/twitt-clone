@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form"
 
 import {zodResolver} from "@hookform/resolvers/zod"
 
-import { threadevalidation } from "@/schemas/validations/ThreadValidation"
+
 
 import { z } from "zod"
 
@@ -23,6 +23,7 @@ import { Textarea } from "../ui/textarea"
 import { useRouter } from "next/navigation"
 
 import {replyToThread } from "@/lib/mongodata/core"
+import { useEffect } from "react"
 
 
 
@@ -31,19 +32,26 @@ import {replyToThread } from "@/lib/mongodata/core"
 
 
 const ReplyForm = ({id}:{id:string}) => {
+     const threadereply = z.object({
+        content:z.string().nonempty({message:"must be at least 6 characters long"}).min(6,{message:"must be at least 10 characters long"}),
+      
+        }) 
   
     const router = useRouter()
 
 
     const form = useForm({
         
-        resolver:zodResolver(threadevalidation),
+        resolver:zodResolver(threadereply),
 
         mode:"onTouched"
     })
+    useEffect(() => {
+    console.log(form.formState.isValid)
+    }, [form.formState])
     
 
-    async function onSubmit(v: z.infer<typeof threadevalidation>) {
+    async function onSubmit(v: z.infer<typeof threadereply>) {
         
 
             try {
@@ -100,7 +108,7 @@ return (
 
  <Button type="submit"
   disabled={ !form.formState.isValid || form.formState.isSubmitting}
-   className={` transition-all duration-300  leading-[30px] rounded-ful overflow-hidden   !bg-violet-600  text-xl !text-white font-semibold ${form.formState.isValid  ? "!opacity-1 " : "p-0 !opacity-0 w-0" }`}>
+   className={` transition-all duration-300  leading-[30px] rounded-ful overflow-hidden   !bg-violet-600  text-xl !text-white font-semibold  ${form.formState.isValid  ? "!opacity-1 " : "p-0 !opacity-0 w-0" }`}>
     Reply
     </Button>   
 </div>
