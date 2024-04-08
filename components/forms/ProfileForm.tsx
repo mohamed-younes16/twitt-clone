@@ -94,7 +94,7 @@ const ProfileForm = ({user}:props) => {
         console.log(error.message)
     }
     
-    toast.success("updatedsuccessfully")
+    toast.success("updated successfully")
     setTimeout(() => {
         router.push("/")
     }, 500);
